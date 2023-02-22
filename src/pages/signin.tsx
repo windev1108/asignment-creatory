@@ -65,7 +65,7 @@ const SignIn = () => {
     isShowLogin,
   } = form;
 
-  const handleSignUp = (e: FormEvent) => {
+  const handleSignUp = async (e: FormEvent) => {
     e.preventDefault();
     try {
       if (!isValidName(name)) {
@@ -87,7 +87,18 @@ const SignIn = () => {
         return;
       }
 
-      toast.success("Create user success");
+      const {
+        data: { success },
+      } = await axios.post("/api/create", {
+        name,
+        email,
+        password,
+        phone,
+      });
+
+      if (success) {
+        toast.success("Create user success");
+      }
     } catch (error: any) {
       toast.error(error.message);
     }

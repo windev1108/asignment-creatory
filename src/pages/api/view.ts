@@ -19,7 +19,6 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<UserResponse>
 ) {
-  console.log("req",req.query);
   const limit = parseInt((req.query.limit || "") + "") || 0;
   const offset = parseInt((req.query.offset || "") + "") || 0;
 
